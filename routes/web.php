@@ -27,7 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/events', EventController::class);
 
 
-    Route::get('/attendind-events', AttendingEventController::class)->name('attendingEvents');
+    Route::get('/attending-events', AttendingEventController::class)->name('attendingEvents');
 
     Route::post('/events-attending/{id}', AttentingSystemController::class)->name('events.attending');
 

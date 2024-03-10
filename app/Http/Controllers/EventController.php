@@ -36,7 +36,7 @@ class EventController extends Controller
 
         $events = $events->get();
 
-        return view('eventIndex', compact('events', 'categories'));
+        return view('events.index', compact('events', 'categories'));
     }
 
     /**

@@ -1,20 +1,16 @@
 <x-main-layout>
     <div class="m-2 p-2 flex justify-between">
-        <h3 class="mb-4 text-2xl font-bold text-indigo-700">{{ $event->title }}</h3>
+        <h3 class="mb-4 text-2xl font-bold text-white">{{ $event->title }}</h3>
         <div class="flex space-x-2">
-            From:
+            <p class="text-white">From:</p>
             <span class="mx-2 text-light text-white">{{ $event->start_date->format('m/d/Y') }}</span> | <span class="mx-2 text-white">{{ $event->end_date->format('m/d/Y') }}</span>
         </div>
     </div>
-
     <div class="mb-16 flex flex-wrap">
-        <div class="w-full lg:w-6/12 lg:pr-6">
+        <div class=" lg:w-6/12 lg:pr-6">
             <div class="mb-6">
-                <div class="ripple relative overflow-hidden rounded-lg bg-cover bg-[50%] bg-no-repeat shadow-lg dark:shadow-black/20" data-te-ripple-init data-te-ripple-color="light">
-                    <img src="{{ asset('/images/' . $event->image) }}" class="w-full text-white" alt="Event Image" />
-                    <a href="#!">
-                        <div class="absolute top-0 right-0 bottom-0 left-0 h-full w-full overflow-hidden bg-[hsl(0,0%,98.4%,0.2)] bg-fixed opacity-0 transition duration-300 ease-in-out hover:opacity-100"></div>
-                    </a>
+                <div class="ripple relative overflow-hidden rounded-lg bg-cover bg-[50%] bg-no-repeat shadow-lg dark:shadow-black/20" >
+                    <img src="{{ asset('/images/' . $event->image) }}" class=" text-black" alt="Event Image" />
                 </div>
                 @auth
                     <div class="mt-4 flex justify-between">
@@ -40,12 +36,15 @@
             </div>
         </div>
 
-        <div class="w-full lg:w-6/12 lg:pl-6 bg-slate-50 rounded-md p-2">
-            <p class="mb-6 text-sm text-yellow-600 dark:text-neutral-400">Start: <time>{{ $event->start_time }}</time></p>
-            <p class="mb-6 mt-4 text-neutral-500 dark:text-neutral-300">{{ $event->description }}</p>
+        <div class=" bg-slate-50 rounded-md p-2">
+            <p class="mb-6 text-sm  text-black">Start: <time>{{ $event->start_time }}</time></p>
+            <p class="mb-6 mt-4 text-black">{{ $event->description }}</p>
             <div class="flex justify-end">
-                <div class="flex flex-col">
-                    <div class="text-yellow-700">{{ $event->address }}</div>
+                    <div class="flex items-center text-black" style="margin-right: 437px">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 2a5 5 0 00-5 5c0 5 5 11 5 11s5-6 5-11a5 5 0 00-5-5zm0 7a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                        </svg>
+                        {{ $event->address }}
                 </div>
             </div>
         </div>

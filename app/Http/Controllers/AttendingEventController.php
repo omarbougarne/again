@@ -15,6 +15,6 @@ class AttendingEventController extends Controller
             $q->where('user_id', auth()->id());
         })->get();
 
-        return view('events.attendingEvents', compact('events'));
+        return view('events.attending', compact('events'));
     }
 }
