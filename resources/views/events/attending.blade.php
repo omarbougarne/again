@@ -35,9 +35,6 @@
                                     {{ $event->start_date }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $event->country->name }}
-                                </td>
-                                <td class="px-6 py-4">
                                     <div class="flex space-x-2">
                                         <a href="{{ route('eventShow', $event) }}"
                                             class="text-green-400 hover:text-green-600">View</a>

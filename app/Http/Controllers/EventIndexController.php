@@ -12,7 +12,7 @@ class EventIndexController extends Controller
      */
     public function __invoke()
     {
-        $events = Event::all();
+        $events = Event::all(); //paginate(4)
         $categories = Category::with('events')->get();
 
         return view('eventIndex', compact('events', 'categories'));

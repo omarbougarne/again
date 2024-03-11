@@ -14,15 +14,17 @@ class AttentingSystemController extends Controller
     {
         $event = Event::findOrFail($id);
         $attending = $event->attendings()->where('user_id', auth()->id())->first();
+
+        // Toggle attendance status
         if (!is_null($attending)) {
             $attending->delete();
-            return null;
+            return response()->json(['message' => 'Attendance removed'], 200);
         } else {
             $attending = $event->attendings()->create([
                 'user_id' => auth()->id(),
                 'num_tickets' => 1
             ]);
-            return $attending;
+            return response()->json(['message' => 'Attendance added'], 200);
         }
     }
 }

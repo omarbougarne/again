@@ -14,9 +14,10 @@
                 </div>
                 @auth
                     <div class="mt-4 flex justify-between">
-                        <button type="button" @click="onHandleAttending" class="text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 {{ $attending ? 'bg-indigo-700 hover:bg-indigo-800' : 'bg-slate-400 hover:bg-slate-500' }}">
+                        <button type="button" onclick="toggleAttendance({{ $event->id }})" class="text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 {{ $attending ? 'bg-indigo-700 hover:bg-indigo-800' : 'bg-slate-400 hover:bg-slate-500' }}">
                             Attending
                         </button>
+
                     </div>
                 @endauth
                 <div class="flex flex-col p-4 mt-6 bg-slate-200 rounded-md">
@@ -51,3 +52,29 @@
     </div>
 
 </x-main-layout>
+<script>
+    function toggleAttendance(eventId) {
+        // Send AJAX request to the server
+        fetch(`/events-attending/${eventId}`, {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({ eventId: eventId })
+        })
+        .then(response => {
+            if (response.ok) {
+                // Reload the page to reflect the changes
+                window.location.reload();
+            } else {
+                console.error('Failed to toggle attendance');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+</script>
+
