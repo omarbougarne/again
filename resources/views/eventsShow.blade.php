@@ -54,7 +54,6 @@
 </x-main-layout>
 <script>
     function toggleAttendance(eventId) {
-        // Send AJAX request to the server
         fetch(`/events-attending/${eventId}`, {
             method: 'POST',
             headers: {
@@ -66,7 +65,6 @@
         })
         .then(response => {
             if (response.ok) {
-                // Reload the page to reflect the changes
                 window.location.reload();
             } else {
                 console.error('Failed to toggle attendance');
