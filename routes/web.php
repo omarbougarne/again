@@ -15,21 +15,20 @@ Route::get('/e', EventIndexController::class)->name('eventIndex');
 Route::get('/e/{id}', EventShowController::class)->name('eventShow');
 Route::get('/events/filter', [EventController::class, 'filter'])->name('eventFilter');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () {return view('dashboard');})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('/events', EventController::class);
+    Route::middleware('organiser')->resource('/events', EventController::class);
 
 
-    Route::get('/attending-events', AttendingEventController::class)->name('attendingEvents');
-
-    Route::post('/events-attending/{id}', AttentingSystemController::class)->name('events.attending');
+    Route::middleware('role:user')->group(function () {
+        Route::get('/attending-events', AttendingEventController::class)->name('attendingEvents');
+        Route::post('/events-attending/{id}', AttentingSystemController::class)->name('events.attending');
+    });
 
 
 });
